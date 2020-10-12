@@ -19,32 +19,45 @@ rolls = {
 
 def main():
     utill.print_header('Rock Paper Scissors')
-    player_1 = input('player 1 enter name\n')
-    player_2 = 'computer'
-    play_game(player_1, player_2)
+    # player_1 = input('player 1 enter name\n')
+    # player_2 = 'computer'
+    player_count, player_1, player_2 = get_players()
+    play_game(player_1, player_2, player_count)
 
 
-def play_game(player_1, player_2):
+def get_players():
+    player_count = int(input('would you like to play (1. bots) or (2. local)?'))
+    if player_count == 1:
+        player_1 = input('player 1 enter name\n')
+        player_2 = 'computer'
+    elif player_count == 2:
+        player_1 = input('player 1 enter name\n')
+        player_2 = input('player 2 enter name\n')
+    return player_count, player_1, player_2
+
+
+def play_game(player_1, player_2, player_count):
     wins = {player_1: 0, player_2: 0}
 
     roll_names = list(rolls.keys())
-
     while not find_winner(wins, [player_1, player_2]):
-        roll_1 = get_roll(player_1, roll_names)
-        # roll_2 = get_roll(player_2, rolls)
-        # player_2 = 'computer'
-        roll_2 = random.choice(roll_names)
-
-        if not roll_1:
-            # print('really? its rock paper scissors not whatever the fuck that was\n')
-            continue
+        if player_count == 1:
+            roll_1 = get_roll(player_1, roll_names)
+            roll_2 = random.choice(roll_names)
+            if not roll_1:
+                continue
+        if player_count == 2:
+            roll_1 = get_roll(player_1, roll_names)
+            if not roll_1:
+                continue
+            roll_2 = get_roll(player_2, roll_names)
+            if not roll_2:
+                continue
 
         print(f'{player_1} rolls {roll_1}')
         print(f'{player_2} rolls {roll_2}')
 
         winner = check_for_winning_throw(player_1, player_2, roll_1, roll_2)
-
-        # print('the game is over!')
 
         if winner is None:
             print('this round was a tie!\n')
@@ -90,7 +103,7 @@ def get_roll(player_name, roll_names):
     selected_index = int(text) - 1
 
     if selected_index < 0 or selected_index >= len(rolls):
-        print('do you even know what your doing? try agene \n')
+        print('do you even know what your doing? try again \n')
         return None
 
     return roll_names[selected_index]
