@@ -40,7 +40,12 @@ def show_board(board):
     for row in board:
         print("| ", end='')
         for cell in row:
-            print(cell, end=" | ")
+            symbol = None
+            if cell is None:
+                symbol = "_"
+            else:
+                symbol = cell
+            print(symbol, end=" | ")
         print()
 
 
