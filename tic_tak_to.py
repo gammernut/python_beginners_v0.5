@@ -18,12 +18,6 @@ def main():
         [None, None, None]
     ]
 
-    # board = [
-    #     [cell1, cell3, cell3],
-    #     [r2_c1, r2_c1, r2_c1],
-    #     [r3_c1, r3_c1, r3_c1]
-    # ]
-
 
 if __name__ == '__main__':
     main()
