@@ -30,21 +30,40 @@ def main():
     # UNTIL SOMEONE WINS
     while not find_winner(board):
         player = players[active_player_index]
-
+        symbol = symbols[active_player_index]
         announce_turn(player)
         show_board(board)
-        input("paused")
+
+        if not choose_location(board, symbol):
+            print("thats not a option, try again.")
+            continue
+
+
+def choose_location(board, symbol):
+    row = int(input("choose which row"))
+    column = int(input("choose which column"))
+
+    row -= 1
+    column -= 1
+    if row < 0 or row >= len(board):
+        return False
+    if column < 0 or column >= len(board[0]):
+        return False
+
+    cell = board[row][column]
+    if cell is not None:
+        return False
+
+    board[row][column] = symbol
+    return True
+
 
 
 def show_board(board):
     for row in board:
         print("| ", end='')
         for cell in row:
-            symbol = None
-            if cell is None:
-                symbol = "_"
-            else:
-                symbol = cell
+            symbol = cell if cell is not None else "_"
             print(symbol, end=" | ")
         print()
 
