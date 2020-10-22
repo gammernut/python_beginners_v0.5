@@ -1,12 +1,5 @@
 import utill
-
-
-# todo choose the players
-# todo create the board
-# todo show the board
-# todo choose initial player
-# todo until someone wins choose location, mark it toggle active player and update the board
-# game over!
+import random
 
 
 def main():
@@ -19,10 +12,15 @@ def main():
         [None, None, None]
     ]
 
+    # ai
+    # roll_2 = random.choice(roll_names)
+    # ai
+
     # choose initial player
+    active_player_index = random.randrange(0, 2)
     # the first player is index/number 0 the second player is index/number 1
     # ie. player 1 is 0 player 2 is 1
-    active_player_index = 0
+    # active_player_index = 0
     players = ["Jacob", "Computer"]
     symbols = ["X", "O"]
     player = players[active_player_index]
