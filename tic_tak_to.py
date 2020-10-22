@@ -87,11 +87,7 @@ def find_winner(board):
         if not symbol1:
             continue
 
-        for cell in row:
-            if cell != symbol1:
-                continue
 
-        return True
 
     # win by columns
     columns = []
