@@ -116,5 +116,9 @@ def find_winner(board):
     return False
 
 
+def get_winning_sequences(board):
+    pass
+
+
 if __name__ == '__main__':
     main()
