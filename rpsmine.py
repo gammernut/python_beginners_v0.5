@@ -46,7 +46,7 @@ def play_game(player_1, player_2, player_count):
             roll_2 = random.choice(roll_names)
             if not roll_1:
                 continue
-        if player_count == 2:
+        elif player_count == 2:
             roll_1 = get_roll(player_1, roll_names)
             if not roll_1:
                 continue
