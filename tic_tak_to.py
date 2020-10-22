@@ -28,54 +28,39 @@ def main():
         announce_turn(player)
         show_board(board)
 
-        if not choose_location(board, symbol, active_player_index):
-            print("that's not a option, try again.")
-            continue
-
+        if active_player_index == 0:
+            if not choose_location(board, symbol):
+                print("that's not a option, try again.")
+                continue
+        else:
+            if not ai_roll(board, symbol):
+                print("that's not a option, try again.")
+                continue
         # toggle active player
         active_player_index = (active_player_index + 1) % len(players)
-
+    print()
     print(f'Game Over {player} has won with the board: ')
     show_board(board)
+    print()
 
 
-def choose_location(board, symbol, active_player_index):
-    if active_player_index == 0:
-        row = int(input("choose which row"))
-        column = int(input("choose which column"))
+def choose_location(board, symbol):
+    row = int(input("choose which row"))
+    column = int(input("choose which column"))
 
-        row -= 1
-        column -= 1
-        if row < 0 or row >= len(board):
-            return False
-        if column < 0 or column >= len(board[0]):
-            return False
+    row -= 1
+    column -= 1
+    if row < 0 or row >= len(board):
+        return False
+    if column < 0 or column >= len(board[0]):
+        return False
 
-        cell = board[row][column]
-        if cell is not None:
-            return False
+    cell = board[row][column]
+    if cell is not None:
+        return False
 
-        board[row][column] = symbol
-        return True
-
-    else:
-        row = random.randrange(4)
-        column = random.randrange(4)
-
-        # row -= 1
-        # column -= 1
-        if row < 0 or row >= len(board):
-            return False
-        if column < 0 or column >= len(board[0]):
-            return False
-
-        cell = board[row][column]
-        if cell is not None:
-            return False
-
-        board[row][column] = symbol
-        return True
-        # return row, column
+    board[row][column] = symbol
+    return True
 
 
 def show_board(board):
@@ -148,6 +133,19 @@ def ai_roll(board, symbol):
     board[row][column] = symbol
     # return True
     return row, column
+
+
+def multiplayer_toggle():
+    print()
+    user_chooce = input('would you like to play (1)single or (2)multiplayer?')
+    if user_chooce == 2:
+        player1 = input('welcome to Tic Tak Toe what is your name')
+        player2 = input('welcome to Tic Tak Toe what is your name')
+    else:
+        player1 = input('welcome to Tic Tak Toe what is your name')
+    print()
+
+    pass
 
 
 if __name__ == '__main__':
