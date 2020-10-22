@@ -11,7 +11,6 @@ import utill
 
 def main():
     utill.print_header('Tic Tac Toe')
-    # CREATE THE BOARD:
     # Board is a list of rows
     # rows are a list of cells
     board = [
@@ -26,17 +25,24 @@ def main():
     active_player_index = 0
     players = ["Jacob", "Computer"]
     symbols = ["X", "O"]
-
+    player = players[active_player_index]
     # UNTIL SOMEONE WINS
     while not find_winner(board):
         player = players[active_player_index]
         symbol = symbols[active_player_index]
+
         announce_turn(player)
         show_board(board)
 
         if not choose_location(board, symbol):
             print("thats not a option, try again.")
             continue
+
+        # toggle active player
+        active_player_index = (active_player_index + 1) % len(players)
+
+    print(f'Game Over {player} has won with the board: ')
+    show_board(board)
 
 
 def choose_location(board, symbol):
@@ -58,7 +64,6 @@ def choose_location(board, symbol):
     return True
 
 
-
 def show_board(board):
     for row in board:
         print("| ", end='')
@@ -75,6 +80,34 @@ def announce_turn(player):
 
 
 def find_winner(board):
+    # win by rows
+    rows = board
+    for row in rows:
+        symbol1 = row[0]
+        if not symbol1:
+            continue
+
+        for cell in row:
+            if cell != symbol1:
+                continue
+
+        return True
+
+    # win by columns
+    columns = []
+    for col_idx in range(0, 3):
+        col = [
+            board[0][col_idx],
+            board[1][col_idx],
+            board[2][col_idx],
+        ]
+
+    # win by diagonals
+    diagonals = [
+        board[0][0], board[1][1], board[2][2],
+        board[0][2], board[1][1], board[2][0]
+    ]
+
     return False
 
 
