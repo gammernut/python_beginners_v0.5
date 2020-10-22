@@ -17,7 +17,7 @@ def main():
     # ai
 
     # choose initial player
-    active_player_index = random.randrange(0, 2)
+    active_player_index = random.randrange(2)
     # the first player is index/number 0 the second player is index/number 1
     # ie. player 1 is 0 player 2 is 1
     # active_player_index = 0
@@ -32,8 +32,8 @@ def main():
         announce_turn(player)
         show_board(board)
 
-        if not choose_location(board, symbol):
-            print("thats not a option, try again.")
+        if not choose_location(board, symbol, active_player_index):
+            print("that's not a option, try again.")
             continue
 
         # toggle active player
@@ -43,23 +43,43 @@ def main():
     show_board(board)
 
 
-def choose_location(board, symbol):
-    row = int(input("choose which row"))
-    column = int(input("choose which column"))
+def choose_location(board, symbol, active_player_index):
+    if active_player_index == 0:
+        row = int(input("choose which row"))
+        column = int(input("choose which column"))
 
-    row -= 1
-    column -= 1
-    if row < 0 or row >= len(board):
-        return False
-    if column < 0 or column >= len(board[0]):
-        return False
+        row -= 1
+        column -= 1
+        if row < 0 or row >= len(board):
+            return False
+        if column < 0 or column >= len(board[0]):
+            return False
 
-    cell = board[row][column]
-    if cell is not None:
-        return False
+        cell = board[row][column]
+        if cell is not None:
+            return False
 
-    board[row][column] = symbol
-    return True
+        board[row][column] = symbol
+        return True
+
+    else:
+        row = random.randrange(4)
+        column = random.randrange(4)
+
+        # row -= 1
+        # column -= 1
+        if row < 0 or row >= len(board):
+            return False
+        if column < 0 or column >= len(board[0]):
+            return False
+
+        cell = board[row][column]
+        if cell is not None:
+            return False
+
+        board[row][column] = symbol
+        return True
+        # return row, column
 
 
 def show_board(board):
@@ -112,6 +132,26 @@ def get_winning_sequences(board):
     sequences.extend(diagonals)
 
     return sequences
+
+
+def ai_roll(board, symbol):
+    row = random.randrange(4)
+    column = random.randrange(4)
+
+    # row -= 1
+    # column -= 1
+    if row < 0 or row >= len(board):
+        return False
+    if column < 0 or column >= len(board[0]):
+        return False
+
+    cell = board[row][column]
+    if cell is not None:
+        return False
+
+    board[row][column] = symbol
+    # return True
+    return row, column
 
 
 if __name__ == '__main__':
