@@ -80,44 +80,40 @@ def announce_turn(player):
 
 
 def find_winner(board):
-    # win by rows
-    rows = board
-    for row in rows:
-        symbol1 = row[0]
-        if symbol1 and all(symbol1 == cell for cell in row):
-            return True
+    sequences = get_winning_sequences(board)
 
-    # win by columns
-    columns = []
-    for col_idx in range(0, 3):
-        col = [
-            board[0][col_idx],
-            board[1][col_idx],
-            board[2][col_idx],
-        ]
-        columns.append(col)
-
-    for col in columns:
-        symbol1 = col[0]
-        if symbol1 and all(symbol1 == cell for cell in col):
-            return True
-
-    # win by diagonals
-    diagonals = [
-        [board[0][0], board[1][1], board[2][2]],
-        [board[0][2], board[1][1], board[2][0]]
-    ]
-
-    for diag in diagonals:
-        symbol1 = diag[0]
-        if symbol1 and all(symbol1 == cell for cell in diag):
+    for cells in sequences:
+        symbol1 = cells[0]
+        if symbol1 and all(symbol1 == cell for cell in cells):
             return True
 
     return False
 
 
 def get_winning_sequences(board):
-    pass
+    sequences = []
+
+    # win by rows
+    rows = board
+    sequences.extend(rows)
+
+    # win by columns
+    for col_idx in range(0, 3):
+        col = [
+            board[0][col_idx],
+            board[1][col_idx],
+            board[2][col_idx],
+        ]
+        sequences.append(col)
+
+    # win by diagonals
+    diagonals = [
+        [board[0][0], board[1][1], board[2][2]],
+        [board[0][2], board[1][1], board[2][0]]
+    ]
+    sequences.extend(diagonals)
+
+    return sequences
 
 
 if __name__ == '__main__':
