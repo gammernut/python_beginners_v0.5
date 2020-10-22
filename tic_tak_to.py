@@ -84,10 +84,8 @@ def find_winner(board):
     rows = board
     for row in rows:
         symbol1 = row[0]
-        if not symbol1:
-            continue
-
-
+        if symbol1 and all(symbol1 == cell for cell in row):
+            return True
 
     # win by columns
     columns = []
@@ -97,12 +95,23 @@ def find_winner(board):
             board[1][col_idx],
             board[2][col_idx],
         ]
+        columns.append(col)
+
+    for col in columns:
+        symbol1 = col[0]
+        if symbol1 and all(symbol1 == cell for cell in col):
+            return True
 
     # win by diagonals
     diagonals = [
-        board[0][0], board[1][1], board[2][2],
-        board[0][2], board[1][1], board[2][0]
+        [board[0][0], board[1][1], board[2][2]],
+        [board[0][2], board[1][1], board[2][0]]
     ]
+
+    for diag in diagonals:
+        symbol1 = diag[0]
+        if symbol1 and all(symbol1 == cell for cell in diag):
+            return True
 
     return False
 
