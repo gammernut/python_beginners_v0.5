@@ -4,6 +4,9 @@ import random
 
 def main():
     utill.print_header('Tic Tac Toe')
+
+    player_count, player1, player2 = multiplayer_toggle()
+
     # Board is a list of rows
     # rows are a list of cells
     board = [
@@ -17,7 +20,7 @@ def main():
     # the first player is index/number 0 the second player is index/number 1
     # ie. player 1 is 0 player 2 is 1
     # active_player_index = 0
-    players = ["Jacob", "Computer"]
+    players = [player1, player2]
     symbols = ["X", "O"]
     player = players[active_player_index]
     # UNTIL SOMEONE WINS
@@ -137,15 +140,16 @@ def ai_roll(board, symbol):
 
 def multiplayer_toggle():
     print()
-    user_chooce = input('would you like to play (1)single or (2)multiplayer?')
-    if user_chooce == 2:
+    player_count = input('would you like to play (1)single or (2)multiplayer?')
+    if player_count == 2:
         player1 = input('welcome to Tic Tak Toe what is your name')
         player2 = input('welcome to Tic Tak Toe what is your name')
-    else:
+    elif player_count == 1:
         player1 = input('welcome to Tic Tak Toe what is your name')
+        player2 = 'computer'
     print()
 
-    pass
+    return player_count, player1, player2
 
 
 if __name__ == '__main__':
