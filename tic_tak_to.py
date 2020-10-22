@@ -12,10 +12,6 @@ def main():
         [None, None, None]
     ]
 
-    # ai
-    # roll_2 = random.choice(roll_names)
-    # ai
-
     # choose initial player
     active_player_index = random.randrange(2)
     # the first player is index/number 0 the second player is index/number 1
