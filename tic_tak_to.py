@@ -64,10 +64,11 @@ def choose_location(board, symbol):
 
 
 def show_board(board):
-    for row in board:
+    for row_idx, row in enumerate(board, start=1):
         print("| ", end='')
-        for cell in row:
-            symbol = cell if cell is not None else "_"
+        for col_idx, cell in enumerate(row, start=1):
+            empty_text = f"({row_idx}, {col_idx})"
+            symbol = f'  {cell}   ' if cell is not None else empty_text
             print(symbol, end=" | ")
         print()
 
