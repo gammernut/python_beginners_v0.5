@@ -135,18 +135,5 @@ def ai_roll(board, symbol):
     return row, column
 
 
-def multiplayer_toggle():
-    print()
-    user_chooce = input('would you like to play (1)single or (2)multiplayer?')
-    if user_chooce == 2:
-        player1 = input('welcome to Tic Tak Toe what is your name')
-        player2 = input('welcome to Tic Tak Toe what is your name')
-    else:
-        player1 = input('welcome to Tic Tak Toe what is your name')
-    print()
-
-    pass
-
-
 if __name__ == '__main__':
     main()
