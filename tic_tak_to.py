@@ -3,9 +3,15 @@ import random
 
 
 def main():
-    utill.print_header('Tic Tac Toe')
+    #
+    # part of main
+    #
 
-    player_count, player1, player2 = multiplayer_toggle()
+    utill.print_header('Tic Tac Toe')
+    player1 = None
+    player2 = None
+    player_count = None
+    multiplayer_toggle()
 
     # Board is a list of rows
     # rows are a list of cells
@@ -45,6 +51,24 @@ def main():
     print(f'Game Over {player} has won with the board: ')
     show_board(board)
     print()
+
+    #
+    # part of main
+    #
+
+
+def multiplayer_toggle():
+    print()
+    player_count = input('would you like to play (1)single or (2)multiplayer?')
+    if player_count == 2:
+        player1 = input('welcome to Tic Tak Toe what is your name')
+        player2 = input('welcome to Tic Tak Toe what is your name')
+    elif player_count == 1:
+        player1 = input('welcome to Tic Tak Toe what is your name')
+        player2 = 'computer'
+    print()
+
+    return player_count, player1, player2
 
 
 def choose_location(board, symbol):
@@ -136,20 +160,6 @@ def ai_roll(board, symbol):
     board[row][column] = symbol
     # return True
     return row, column
-
-
-def multiplayer_toggle():
-    print()
-    player_count = input('would you like to play (1)single or (2)multiplayer?')
-    if player_count == 2:
-        player1 = input('welcome to Tic Tak Toe what is your name')
-        player2 = input('welcome to Tic Tak Toe what is your name')
-    elif player_count == 1:
-        player1 = input('welcome to Tic Tak Toe what is your name')
-        player2 = 'computer'
-    print()
-
-    return player_count, player1, player2
 
 
 if __name__ == '__main__':
